@@ -75,11 +75,4 @@ class RegisterController extends Controller
             'type_id' => $data['type_id']
         ]);
     }
-
-    public function getType(){
-
-        $types= DB::table('types')->get();
-
-        return($types);
-    }
 }

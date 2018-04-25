@@ -33,7 +33,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand" href="{{ url('/home') }}">
                         PetApp
                     </a>
                 </div>
@@ -41,7 +41,8 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                        <li><a href="">Profile</a></li>
+                        <li><a href="">Chats</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

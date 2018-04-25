@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $gato= Type::create([
-        	'name' => 'gato'
+        	'name' => 'Gato'
         ]);
 
         $perro->breeds()->createMany([

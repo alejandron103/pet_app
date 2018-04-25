@@ -1,3 +1,6 @@
+@php
+    $types= App\Type::all();
+@endphp
 @extends('layouts.app')
 
 <style type="text/css">
@@ -23,37 +26,13 @@
                     <form class="form-horizontal" method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Nombre de la mascota</label>
+                        @include('inputs.text-field', ['name' => 'name', 'text' => 'Nombre de la mascota'])
 
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+                        @include('inputs.text-field', ['name' => 'age', 'text' => 'Edad de la mascota'])
 
-                                @include('layouts.error', ['input'=> 'name'])
-                            </div>
-                        </div>
+                        @include('inputs.email-field', ['name' => 'email', 'text' => 'Email del dueño'])
 
-                        <div class="form-group{{ $errors->has('age') ? ' has-error' : '' }}">
-                            <label for="age" class="col-md-4 control-label">Edad de la mascota</label>
-
-                            <div class="col-md-6">
-                                <input id="age" type="text" class="form-control" name="age" value="{{ old('age') }}" required autofocus><p class="edad">meses</p>
-
-                                @include('layouts.error', ['input'=> 'age'])
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail del dueño</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-
-                                @include('layouts.error', ['input'=> 'email'])
-                            </div>
-                        </div>
-
-                         <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
                             <label for="gender" class="col-md-4 control-label">Sexo de la mascota</label>
 
                             <div class="col-md-6">
@@ -62,17 +41,23 @@
                                 @include('layouts.error', ['input'=> 'gender'])
                             </div>
                         </div>
-                        @foreach($types as $type)
-                            {{ $types }}
-                        @endforeach
+                        <div class="form-group{{ $errors->has('type_id') ? ' has-error' : '' }}">
+                            <label for="gender" class="col-md-4 control-label">Sexo de la mascota</label>
+                            <div class="col-md-6">
+                            @foreach($types as $type)
+                                <label class="radio-inline"><input @if(old('type_id')==$type->id) checked @endif name="type_id" type="radio" value="{{$type->id}}">{{$type->name}}</label>
+                            @endforeach
+                                @include('layouts.error', ['input'=> 'type_id'])
+                            </div>
+                        </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Contraseña</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
+                                <input id="password" type="password" class="form-control" name="password" value="{{ old('password') }}" required >
 
-                               @include('layouts.error', ['input'=> 'password'])
+                                @include('layouts.error', ['input'=> 'password'])
                             </div>
                         </div>
 
@@ -80,7 +65,7 @@
                             <label for="password-confirm" class="col-md-4 control-label">Confirmar contraseña</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                <input id="password-confirmation" type="password" class="form-control" name="password_confirmation" value="{{ old('password_confirmation') }}" required >
                             </div>
                         </div>
 
