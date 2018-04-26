@@ -41,8 +41,8 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        <li><a href="">Profile</a></li>
-                        <li><a href="">Chats</a></li>
+                        @if(Auth::check())<li><a href="{{ route('profile.edit', ['user' => Auth::user()->id]) }}">Profile</a></li>
+                        <li><a href="">Chats</a></li>@endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        return view('home', ['user' => $request->user()]);
+        $users = User::whereNotIn('id', [$request->user()->id])->get();
+        return view('home', ['user' => $request->user(), 'users' => $users]);
     }
 }

@@ -1,30 +1,16 @@
-@php
-    $types= App\Type::all();
-@endphp
 @extends('layouts.app')
 
-<style type="text/css">
-    p.edad {
-        width: 20px;
-        float: right;
-        font-weight: bold;
-        padding: 4px 58px 0px 0px;
-    }
-    .form-control{
-        width: 80% !important;
-        display: inline-block !important;
-    }
-</style>
 @section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Registro</div>
+                <div class="panel-heading">Editar Perfil</div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('register') }}">
+                    <form class="form-horizontal" method="POST" action="{{ route('profile.update', ['user' => $user->id]) }}">
                         {{ csrf_field() }}
+                        <input type="hidden" name="_method" value="PUT">
 
                         @include('inputs.text-field', ['name' => 'name', 'text' => 'Nombre de la mascota'])
 
@@ -35,8 +21,8 @@
                         <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
                             <label for="gender" class="col-md-4 control-label">Sexo de la mascota</label>
                             <div class="col-md-6">
-                                <label class="radio-inline"><input @if(old('gender')== "M") checked @endif name="gender" type="radio" value="M">Masculino</label>
-                                <label class="radio-inline"><input @if(old('gender')== "F") checked @endif name="gender" type="radio" value="F">Femenino</label>
+                                <label class="radio-inline"><input @if(old('gender')== "M") checked @endif name="gender" type="radio" value="M" disabled>Macho</label>
+                                <label class="radio-inline"><input @if(old('gender')== "F") checked @endif name="gender" type="radio" value="F" disabled>Hembra</label>
                              @include('layouts.error', ['input'=> 'gender'])
                             </div>
                         </div>    
@@ -45,7 +31,7 @@
                             <label for="type_id" class="col-md-4 control-label">Tipo de mascota</label>
                             <div class="col-md-6">
                             @foreach($types as $type)
-                                <label class="radio-inline"><input @if(old('type_id')==$type->id) checked @endif name="type_id" type="radio" value="{{$type->id}}">{{$type->name}}</label>
+                                <label class="radio-inline"><input @if(old('type_id')==$type->id) checked @endif name="type_id" type="radio" value="{{$type->id}}" disabled>{{$type->name}}</label>
                             @endforeach
                                 @include('layouts.error', ['input'=> 'type_id'])
                             </div>
