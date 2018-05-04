@@ -15,7 +15,7 @@
                     @endif
 
                     @foreach($users as $user)
-                        {{ $user['name'] }}
+                        <a href="{{url('messages/create/'.$user->id)}}">{{ $user['name'] }}</a>
                     @endforeach
                 </div>
             </div>

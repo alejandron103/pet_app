@@ -12,12 +12,13 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-</head>
-<style type="text/css">
+    @yield('styles')
+    <style type="text/css">
     .navbar-default .navbar-nav>li>a{
         font-weight: bold;
     }
 </style>
+</head>
 <body>
     <div id="app" style="background-image: url({{ url('images/huella.png') }}); height: 100vh;">
         <nav class="navbar navbar-default navbar-static-top">
@@ -42,7 +43,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         @if(Auth::check())<li><a href="{{ route('profile.edit', ['user' => Auth::user()->id]) }}">Profile</a></li>
-                        <li><a href="">Chats</a></li>@endif
+                        <li><a href="{{url('messages')}}">Chats @include('messenger.unread-count')</a></li>@endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -82,5 +83,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    @yield('scripts')
 </body>
 </html>

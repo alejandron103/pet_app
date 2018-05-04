@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Type;
 use Illuminate\Http\Request;
+use Storage;
 
 class ProfileController extends Controller
 {
@@ -13,6 +14,12 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         //
@@ -79,6 +86,17 @@ class ProfileController extends Controller
     public function update(Request $request, User $user)
     {
         $input = $request->all();
+        $request->validate([
+            'photo'         =>  'nullable|image',
+            'description'   =>  'nullable|string',
+            'name'          =>  'required|string|max:255',
+            'age'           =>  'required|integer|min:0|max:100',
+            'password'      =>  'required|string|min:6|confirmed',
+        ]);
+        if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
+            $path = $request->photo->store('images');
+            $input['photo'] = $path; 
+        }
         $input['password']= bcrypt($input['password']);
         $user->fill($input)->save();
         return redirect('home');
@@ -93,5 +111,13 @@ class ProfileController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+
+    public function getFile($url){
+        if (Storage::exists('images/'.$url)) {
+            return response()->file(storage_path('app/images/'.$url));
+        }
+        return 'none';
+        
     }
 }

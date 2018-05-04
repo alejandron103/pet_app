@@ -4,10 +4,11 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Cmgmyr\Messenger\Traits\Messagable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, Messagable;
 
     /**
      * The attributes that are mass assignable.
@@ -31,10 +32,17 @@ class User extends Authenticatable
         return ucfirst($value);
     }
 
+    public function getPhotoAttribute($value){
+        if ($value) {
+            return url("local/".$value);
+        }else{
+            return 'https://www.fancyhands.com/images/default-avatar-250x250.png';
+        }
+    }
+
     public function type(){
         return $this->belongsTo('App\Type');
     }
-
     /*public function setNameAttribute($value){
         $this->attributes['name']= ucfirst($value);
     }*/
