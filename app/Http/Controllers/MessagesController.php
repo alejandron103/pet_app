@@ -69,7 +69,7 @@ class MessagesController extends Controller
      */
     public function create(User $user)
     {
-        if (Auth::id()< $user->id ) {
+        if (Auth::id() < $user->id ) {
             $users= [Auth::id(), $user->id];
         }else{
             $users= [$user->id, Auth::id()];

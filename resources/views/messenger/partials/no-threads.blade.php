@@ -1,1 +1,1 @@
-<p>Sorry, no threads.</p>
+<p>No tienes chats por el momento.</p>

@@ -35,7 +35,7 @@
                     <a href="{{url('messages/create/'.$user->id)}}">
                         <div class="container-user">
                             <div class="photo-profile">
-                                <img src="{{ $user['photo'] }}" alt="">
+                                <img class="img-circle" style="width: 9vw; height: 9vw" src="{{ $user['photo'] }}" alt="">
                             </div>
                             <div class="cont-text-user">
                                 <p class="name-user"><b>Nombre : </b>{{ $user['name'] }}</p>

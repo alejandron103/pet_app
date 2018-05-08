@@ -28,7 +28,7 @@
 		    </div>
 		</div> --}}
 
-        <h2>Add a new message</h2>		        
+        <h2>Enviar nuevo mensaje</h2>		        
 		    <!-- Message Form Input -->
 		    <div class="form-group">
 		        <textarea id="message" name="message" class="form-control">{{ old('message') }}</textarea>
@@ -36,7 +36,7 @@
 
 		    <!-- Submit Form Input -->
 		    <div class="form-group">
-		        <button id="send" class="btn btn-primary form-control">Submit</button>
+		        <button id="send" class="btn btn-primary form-control">Enviar</button>
 		    </div>
 		</form>
     </div>

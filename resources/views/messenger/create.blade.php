@@ -14,7 +14,7 @@
             <input type="hidden" name="other_user" value="{{$user->id}}">
             <!-- Message Form Input -->
             <div class="form-group">
-                <label class="control-label">Message</label>
+                <label class="control-label">Mensaje</label>
                 <textarea name="message" class="form-control">{{ old('message') }}</textarea>
             </div>
 

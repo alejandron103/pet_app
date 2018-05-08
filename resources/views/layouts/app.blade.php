@@ -42,7 +42,7 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        @if(Auth::check())<li><a href="{{ route('profile.edit', ['user' => Auth::user()->id]) }}">Profile</a></li>
+                        @if(Auth::check())<li><a href="{{ route('profile.edit', ['user' => Auth::user()->id]) }}">Mi perfil</a></li>
                         <li><a href="{{url('messages')}}">Chats @include('messenger.unread-count')</a></li>@endif
                     </ul>
 
@@ -63,7 +63,7 @@
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout
+                                            Cerrar sesión
                                         </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
