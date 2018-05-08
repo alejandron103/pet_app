@@ -53,7 +53,7 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'gender' => 'required|in:M,F',
-            'type_id' => 'required|exists:types,id'
+            'breed_id' => 'required|exists:breeds,id'
 
         ]);
     }
@@ -72,7 +72,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'gender' => $data['gender'],
-            'type_id' => $data['type_id']
+            'breed_id' => $data['breed_id']
         ]);
     }
 }

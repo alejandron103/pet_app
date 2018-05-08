@@ -68,8 +68,7 @@ class ProfileController extends Controller
     {
     
         $types = Type::all();
-
-        $breeds = Breed::select()->where('type_id', $user->type_id)->get();
+        $breeds = Breed::all();
 
         if(! $request->old()){
             $request->replace($user->toArray());

@@ -7,7 +7,7 @@
             text-align: center;
             color: #000;
             text-decoration: none;
-            margin: 5vh 0;
+            margin-top: 5vh;
         }
         .container-user:hover{
             transform: scale(1.1);
@@ -33,14 +33,14 @@
 
                     @foreach($users as $user)
                     <a href="{{url('messages/create/'.$user->id)}}">
-                        <div class="container-user">
+                        <div class="container-user col-md-8 col-md-offset-2">
                             <div class="photo-profile">
                                 <img class="img-circle" style="width: 9vw; height: 9vw" src="{{ $user['photo'] }}" alt="">
                             </div>
-                            <div class="cont-text-user">
+                            <div class="cont-text-user" style="margin: 2vh 0 0 0;">
                                 <p class="name-user"><b>Nombre : </b>{{ $user['name'] }}</p>
-                                <p class="type-user"><b>Tipo :</b>{{ $user['type']['name'] }}</p>
-                                {{-- <p class="type-user"><b>Tipo :</b>{{ $user}}</p> --}}
+                                <p class="type-user"><b>Tipo : </b>{{ $user->breed->type->name }}</p>
+                                <p class="type-user"><b>Raza : </b>{{ $user->breed->name }}</p>
                                 <p class="description-user"><b>Descripción : </b>{{ $user['description'] }}</p>
                                 <button class="btn btn-primary">
                                     Comezar Chat

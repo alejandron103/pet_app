@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'age', 'email', 'gender', 'description', 'photo', 'type_id', 'password'   
+        'name', 'age', 'email', 'gender', 'description', 'photo', 'breed_id', 'password'   
     ];
 
     /**
@@ -40,8 +40,8 @@ class User extends Authenticatable
         }
     }
 
-    public function type(){
-        return $this->belongsTo('App\Type');
+    public function breed(){
+        return $this->belongsTo('App\Breed');
     }
     /*public function setNameAttribute($value){
         $this->attributes['name']= ucfirst($value);

@@ -21,11 +21,11 @@ class CreateUsersTable extends Migration
             $table->string('gender', 1);
             $table->string('description')->nullable();
             $table->string('photo')->nullable();
-            $table->unsignedInteger('type_id');
+            $table->unsignedInteger('breed_id');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->foreign('type_id')->references('id')->on('types')->onDelete('restrict');
+            $table->foreign('breed_id')->references('id')->on('breeds')->onDelete('restrict');
         });
     }
 

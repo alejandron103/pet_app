@@ -20,7 +20,7 @@
 </style>
 </head>
 <body>
-    <div id="app" style="background-image: url({{ url('images/huella.png') }}); height: 100vh;">
+    <div style="background-image: url({{ url('images/huella.png') }}); height: 100vh;">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">

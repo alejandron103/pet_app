@@ -10,7 +10,7 @@
 @endsection
 
 @section('content')
-<div class="container">
+<div class="container" id="register">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
@@ -21,13 +21,17 @@
                         {{ csrf_field() }}
                         <input type="hidden" name="_method" value="PUT">
                         <div class="row">
-                            <div class="cont-image col-md-4 col-md-offset-4">
-                                <img src="{{$user->photo?:''}}" class="photo-profile" alt="">
+                            <div class="cont-image col-md-4 col-md-offset-4" style="margin-bottom: 3vh">
+                                <img src="{{$user->photo?:''}}" class="photo-profile img-circle" alt="">
                             </div>
                         </div>  
                          <div class="form-group">
-                            <label class="col-md-4 control-label" for="photo">photo</label>
-                            <input type="file" name="photo" id="photo" class="photo col-md-6">
+                            <div class="col-md-6 col-md-offset-5">
+                                <label class="btn btn-primary">
+                                    <input type="file" name="photo" id="photo" class="hidden">
+                                    subir imagen
+                                </label>
+                            </div>
                         </div>
 
                         @include('inputs.text-field', ['name' => 'name', 'text' => 'Nombre de la mascota'])
@@ -49,7 +53,7 @@
                             <label for="type_id" class="col-md-4 control-label">Tipo de mascota</label>
                             <div class="col-md-6">
                             @foreach($types as $type)
-                                <label class="radio-inline"><input @if(old('type_id')==$type->id) checked @endif name="type_id" type="radio" value="{{$type->id}}" disabled>{{$type->name}}</label>
+                                <label class="radio-inline"><input @if(old('type_id')==$type->id) checked @endif name="type_id" v-model="type_id" type="radio" value="{{$type->id}}">{{$type->name}}</label>
                             @endforeach
                                 @include('layouts.error', ['input'=> 'type_id'])
                             </div>
@@ -58,15 +62,13 @@
                         <div class="form-group{{ $errors->has('breed_id') ? ' has-error' : '' }}">
                             <label for="type_id" class="col-md-4 control-label">raza</label>
                             <div class="col-md-6">
-                                <select name="breed_id" id="breed_id">
-                                    @foreach($breeds as $breed)
-                                        <option @if(old('breed_id')==$breed->id) checked @endif value="{{$breed->id}}">{{$breed->name}}</option>
-                                        {{-- <label class="radio-inline"><input @if(old('breed_id')==$breed->id) checked @endif name="breed_id" breed="radio" value="{{$breed->id}}" disabled>{{$breed->name}}</label> --}}
-                                    @endforeach
+                                <select name="breed_id" v-model="breed_id" id="breed_id">       
+                                    <option v-for="breed in breeds" :value="breed.id" v-if="breed.type_id == type_id">@{{breed.name}}</option>
                                 </select>
                                 @include('layouts.error', ['input'=> 'breed_id'])
                             </div>
                         </div>
+
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Contraseña</label>
@@ -110,6 +112,7 @@
 @endsection
 
 @section('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
         $(document).ready(function(){
 
@@ -130,5 +133,15 @@
               readURL(this);
             });
         });
+
+        var app = new Vue({
+          el: '#register',
+          data: {
+            type_id: {{$user->breed->type->id}},
+            breeds: {!!json_encode($breeds)!!},
+            breed_id: "{!! old('breed_id') !!}"
+          }
+        });
+
     </script>
 @endsection

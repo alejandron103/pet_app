@@ -1,5 +1,6 @@
 @php
     $types= App\Type::all();
+    $breeds= App\Breed::all();
 @endphp
 @extends('layouts.app')
 
@@ -16,7 +17,7 @@
     }
 </style>
 @section('content')
-<div class="container">
+<div class="container" id="register">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
@@ -35,8 +36,8 @@
                         <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
                             <label for="gender" class="col-md-4 control-label">Sexo de la mascota</label>
                             <div class="col-md-6">
-                                <label class="radio-inline"><input @if(old('gender')== "M") checked @endif name="gender" type="radio" value="M">Masculino</label>
-                                <label class="radio-inline"><input @if(old('gender')== "F") checked @endif name="gender" type="radio" value="F">Femenino</label>
+                                <label class="radio-inline"><input @if(old('gender')== "M") checked @endif name="gender" type="radio" value="M">Macho</label>
+                                <label class="radio-inline"><input @if(old('gender')== "F") checked @endif name="gender" type="radio" value="F">Hembra</label>
                              @include('layouts.error', ['input'=> 'gender'])
                             </div>
                         </div>    
@@ -45,9 +46,19 @@
                             <label for="type_id" class="col-md-4 control-label">Tipo de mascota</label>
                             <div class="col-md-6">
                             @foreach($types as $type)
-                                <label class="radio-inline"><input @if(old('type_id')==$type->id) checked @endif name="type_id" type="radio" value="{{$type->id}}">{{$type->name}}</label>
+                                <label class="radio-inline"><input @if(old('type_id')==$type->id) checked @endif name="type_id" v-model="type_id" type="radio" value="{{$type->id}}">{{$type->name}}</label>
                             @endforeach
                                 @include('layouts.error', ['input'=> 'type_id'])
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('breed_id') ? ' has-error' : '' }}">
+                            <label for="type_id" class="col-md-4 control-label">raza</label>
+                            <div class="col-md-6">
+                                <select name="breed_id" v-model="breed_id" id="breed_id">       
+                                    <option v-for="breed in breeds" :value="breed.id" v-if="breed.type_id == type_id">@{{breed.name}}</option>
+                                </select>
+                                @include('layouts.error', ['input'=> 'breed_id'])
                             </div>
                         </div>
 
@@ -82,4 +93,18 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+          el: '#register',
+          data: {
+            type_id: 1,
+            breeds: {!!json_encode($breeds)!!},
+            breed_id: "{!! old('breed_id') !!}"
+          }
+        });
+    </script>
 @endsection
