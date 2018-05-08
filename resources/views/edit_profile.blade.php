@@ -55,6 +55,19 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('breed_id') ? ' has-error' : '' }}">
+                            <label for="type_id" class="col-md-4 control-label">raza</label>
+                            <div class="col-md-6">
+                                <select name="breed_id" id="breed_id">
+                                    @foreach($breeds as $breed)
+                                        <option @if(old('breed_id')==$breed->id) checked @endif value="{{$breed->id}}">{{$breed->name}}</option>
+                                        {{-- <label class="radio-inline"><input @if(old('breed_id')==$breed->id) checked @endif name="breed_id" breed="radio" value="{{$breed->id}}" disabled>{{$breed->name}}</label> --}}
+                                    @endforeach
+                                </select>
+                                @include('layouts.error', ['input'=> 'breed_id'])
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Contraseña</label>
 

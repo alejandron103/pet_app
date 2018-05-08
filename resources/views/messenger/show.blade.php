@@ -10,7 +10,7 @@
     		$cadena=implode(' y ', $users);
     	@endphp
         <h1>Chat <small>de {{ $cadena }}<small></h1>
-        <div id="listMessage">
+        <div id="listMessage" style="height: 65vh; overflow-y: scroll;">
         	@each('messenger.partials.messages', $thread->messages, 'message')
     	</div>
 
@@ -59,6 +59,9 @@
                 console.log( "message: " + JSON.stringify(msg.status));
               });
         });
+        var elem = document.getElementById("listMessage");
+        elem.scrollTop = elem.scrollHeight;
+
         // Enable pusher logging - don't include this in production
         Pusher.logToConsole = true;
 
@@ -72,6 +75,8 @@
         	var new_message= '<div class="media"><a class="pull-left" href="#"><img style="width: 3vw; height: 3vw;" src="'+data.message.user.photo+'" alt="'+data.message.user.name+'" class="img-circle"></a><div class="media-body"><h5 class="media-heading">'+data.message.user.name+'</h5><p>'+data.message.body+'</p><div class="text-muted"><small>Posted '+data.message.fecha+'</small></div></div></div>';
         	$('#listMessage').append(new_message);
         	$("#message").val('');
+          var elem = document.getElementById("listMessage");
+          elem.scrollTop = elem.scrollHeight;
           	//alert(data.message);
         });
     </script>

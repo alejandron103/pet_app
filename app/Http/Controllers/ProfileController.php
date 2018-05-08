@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Type;
+use App\Breed;
 use Illuminate\Http\Request;
 use Storage;
 
@@ -68,12 +69,14 @@ class ProfileController extends Controller
     
         $types = Type::all();
 
+        $breeds = Breed::select()->where('type_id', $user->type_id)->get();
+
         if(! $request->old()){
             $request->replace($user->toArray());
             $request->flash();
         }
         
-        return view('edit_profile', compact(['user', 'types']));
+        return view('edit_profile', compact(['user', 'types', 'breeds']));
     }
 
     /**
