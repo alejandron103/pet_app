@@ -24,7 +24,8 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::whereNotIn('id', [$request->user()->id])->get();
+
+        $users = User::whereNotIn('id', [ $request->user()->id ])->whereIn('breed_id', $request->user()->breed->type->breeds()->pluck('id')->toArray())->get();
         return view('home', ['user' => $request->user(), 'users' => $users]);
     }
 }
