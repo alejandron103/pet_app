@@ -10,24 +10,9 @@
     		$cadena=implode(' y ', $users);
     	@endphp
         <h1>Chat <small>de {{ $cadena }}<small></h1>
-        <div id="listMessage" style="height: 65vh; overflow-y: scroll;">
+        <div id="listMessage" style="height: 55vh; overflow-y: scroll;">
         	@each('messenger.partials.messages', $thread->messages, 'message')
     	</div>
-
-       {{--  <div class="media">
-		    <a class="pull-left" href="#">
-		        <img src="//www.gravatar.com/avatar/{{ md5($message->user->email) }} ?s=64"
-		             alt="{{ $message->user->name }}" class="img-circle">
-		    </a>
-		    <div class="media-body">
-		        <h5 class="media-heading">{{ $message->user->name }}</h5>
-		        <p>{{ $message->body }}</p>
-		        <div class="text-muted">
-		            <small>Posted {{ $message->created_at->diffForHumans() }}</small>
-		        </div>
-		    </div>
-		</div> --}}
-
         <h2>Enviar nuevo mensaje</h2>		        
 		    <!-- Message Form Input -->
 		    <div class="form-group">

@@ -55,7 +55,8 @@
                         <div class="form-group{{ $errors->has('breed_id') ? ' has-error' : '' }}">
                             <label for="type_id" class="col-md-4 control-label">raza</label>
                             <div class="col-md-6">
-                                <select name="breed_id" v-model="breed_id" id="breed_id">       
+                                <select name="breed_id" v-model="breed_id" id="breed_id" required>
+                                    <option value=""> selecciona una raza</option>    
                                     <option v-for="breed in breeds" :value="breed.id" v-if="breed.type_id == type_id">@{{breed.name}}</option>
                                 </select>
                                 @include('layouts.error', ['input'=> 'breed_id'])
