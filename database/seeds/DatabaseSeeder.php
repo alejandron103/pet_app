@@ -14,22 +14,32 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
-        $perro= Type::create([
+       /* $perro= Type::create([
         	'name' => 'Perro'
         ]);
 
         $gato= Type::create([
         	'name' => 'Gato'
-        ]);
+        ]);*/
+
+        $perro = Type::find(1);
+        $gato = Type::find(2);
 
         $perro->breeds()->createMany([
-        	['name'=> 'siberiano'],
-        	['name'=> 'pitbull'],
+        	['name'=> 'huskee siberiano'],
+        	// ['name'=> 'pitbull'],
+            ['name'=> 'bull terrier'],
+            ['name'=> 'golden'],
+            ['name'=> 'labrador'],
         ]);
 
         $gato->breeds()->createMany([
-        	['name'=> 'persa'],
-        	['name'=> 'siames'],
+        	// ['name'=> 'persa'],
+        	// ['name'=> 'siames'],
+            ['name'=> 'bengala'],
+            ['name'=> 'burmés'],
+            ['name'=> 'ragdoll'],
+            ['name'=> 'siberiano'],
         ]);
     }
 }
